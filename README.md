@@ -2,10 +2,15 @@
                     +---------------+
                     | M S C R E E N |
                     +---------------+
-This is small MS-DOS multotasker, written during 1992-1995 when we run first BBS and Fido node in Odesa, Ukraine, on very weak IBM-PC XT, and later on IBM-PC AT machines.
+This is small MS-DOS multotasker, written during 1992-1995 when we run
+first BBS and Fido node in Odesa, Ukraine, on very weak IBM-PC XT, and
+later on IBM-PC AT machines.
 
 
-We had to run on the same computer: BBS, a program for dialing uplink for mail, a program for processing, rerouting and packing mail. At that time, we were very limited in RAM, so we needed a very thin layer to provide multitasking.
+We had to run on the same computer: BBS, a program for dialing uplink for
+mail, a program for processing, rerouting and packing mail. At that time,
+we were very limited in RAM, so we needed a very thin layer to provide
+multitasking.
 
 Here is list of files from zip archive
 
