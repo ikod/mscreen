@@ -1,0 +1,51 @@
+THIS PROGRAMM IS FREE.
+YOU CAN USE THIS SOURCES AS YOU WISH, AS LONG AS YOU DISTRIBUTE THIS
+FILE AND README.1ST AND README.ENG WITH ANY PARTS OF MSCREEN.
+
+					Igor Khasilev, Odessa
+                                fido:	2:467/3
+                                	2:467/2
+                            internet:	igor@petre.odessa.ua
+--------------------------------------------------------------------
+This is sources "as is". I add minimum comments. For the following comments
+write me. I'm still alive and I'm still support mscreen.
+
+If you decide to change something in sources in order to make program more
+stable, give more functionality, you are welcome. Be warned, that adding
+almost anything in code require very heavy following testing. Don't think
+if after any changes program still work - that mean it will work always:
+there are some bugs that can be detected only after hour (day, month,...)
+of intensive running. Please inform me about any changes. please, don't
+distribute derived versions, or explicitly point out that your version is
+not an original mscreen.
+
+Details on starting mscreen read in readme.eng.
+
+Parts of code, responsible for the mail boxes, priorities, halt/restart
+processes are commented out because mscreen don't use this code.
+---------------------------------------------------------------------
+
+Everything was compiled with tasm 2.0, linked with tlink 2.0.
+
+You can compile everything with command line:
+
+>tasm /m mscreen+dosx+append+setargv
+
+You can link mscreen with cmd line
+
+>tlink mscreen dosx append setargv
+
+Short description of files:
+
+mscreen.asm	- main programm: sheduler, interrupt handler (except int 21),
+		  start code.
+dosx.asm	- dos calls handler. Te original code was written with help
+		  of Yu.Semenov.
+append.asm	- various support parts: memory control, system analys, etc.
+setargv		- command line parameters general parser - written by
+		  Yu.Semenov, used after his permission.
+----------------------------------------------------------------------
+					Igor Khasilev, Odessa
+                                fido:	2:467/3
+                                	2:467/2
+                            internet:	igor@petre.odessa.ua

@@ -1,0 +1,144 @@
+			-M S C R E E N-
+
+          very small multitasker for MSDOS on 8086, 80286, ...
+
+0. Read this manual carefully, please.
+1. This program was developed as small multitasker for MS_DOS.
+   It is written around very compact kernel that support preemptive
+   multitasking, some inter-process communications primitives, prioritized
+   scheduling with round robin planning on each level of priority.
+   Althought kernel support many processes, mscreen itself run only
+   three processes: one process ("main") that refresh screens, and two
+   other, that user wish to run. All three processes run on the same
+   level of priority.
+
+   Of course, I try to make it as stable as possible, but you must
+   understand that real multitasking in MS DOS is not possible.
+   Even DesqView - the best (my opinion) multitasker for DOS
+   hangs sometimes.
+
+   Plese, send your comments to igor@petre.odessa.ua or Igor Khasilev,
+   2:467/3@FidoNet.   
+
+2. HOW TO START IT? 
+   ----------------
+   Use command line:
+
+   >mscreen [/sDDD] [/vHH] [/tD1:D2] [/e] [filename1] [filename2]
+
+   Where 
+	filename1, filename2 - .bat,.exe,.com - what you want to
+                run in parallel. If ommitted, then command.com will
+                be started. Environment must contain string 
+                "COMSPEC=".
+	/sDDD - memeory size (in Kbytes) for 1st task. DDD is decimal.
+                Default value is 250.
+	/vHH  - vector, that will be used for irq0 mapping. HH - hexadecimal.
+         	Programm will search free vector if nothing pointed.
+                Please, don't use this key if you don't understand clearly
+                what do you do.
+	/tD1:D2-timer ticks. Both D1 and D2 are in range 1-9.
+         	Default is 3:3. D1 - ticks for 1st task, D2 - ticks
+		for 2nd task.
+	/e    - don't hide EMS.
+   Examples:
+
+   >mscreen job1.bat job2.bat
+
+	job1.bat will start in 250K window. job2.bat will
+	start in remainder. Every task will have 3 ticks.
+
+   More complicated example:
+
+   >mscreen /s300 /vA0 /t3:6 bink.bat tosser.bat
+
+	bink.bat will started in 300K window. Vector A0h will be used
+        for irq0. First task will have 3 ticks, second - 6 ticks.
+
+3. HOW TO EXIT FROM IT?
+   --------------------
+   Just exit from anything, you started under mscreen.
+   By the way, you can 'kill' process just pressing CTRL-ALT-DEL.
+   Process will be killed on next task switching (so result of ctrl-allt-del
+   sometimes delays on 0.5-2 sec). Killed or finished task can be restarted
+   with CTRL-ALT-INS.
+
+4. HOW TO SWITCH BETWEEN WINDOWS?
+   -----------------------------
+   Use ALT-TAB to switch between windows.
+
+5. SOME VIDEO-TROUBLES...
+   -------------------
+   If you run programm that write directly to video-ram, probably you
+   will see something like very fast vanishing pictures on the screen.
+   Press ALT-ESC before running such programms, and press ALT-ESC after
+   you leave it.
+
+   Important: under Mscreen use only text modes 80x25!
+
+6. OTHER TROUBLES...
+   --------------
+   The mouse and the EMS are not visible inside mscreen.
+   You can use EMS if you use /e in command line.
+   Mscreen can't work properly with:
+   ncache, lancache (in staged write delay mode) on server.
+   This version designed only for MS-DOS.
+
+   Never run programms like NDD, Diskedit, Speedisk under mscreen
+   They WILL work, but they CAN destroy your filesystem.
+
+Special thanks:
+Yury Semenov       - for ideas. DOS low function support was written in 
+                     collaboration with him.
+Victor Buzdugan    - he was first who ask me to write this program.
+Pasha Shtemenko and
+Gennady Rashkovich - for long time testing.
+
+
+				Igor Khasilev
+				2:467/3@FidoNet
+                                2:467/2@FidoNet
+                                igor@petre.odessa.ua
+
+---------------------------------------------------------------------
+Some hints:
+
+You can use "vidram" from QuarterDeck if you have EGA or VGA. Load vidram
+before mscreen and you will get 100k more RAM!
+
+Among other there are two kind of data that Mscreen keep in memory: 
+screen image for every task and "current directory structure". 
+It is impossible to reduce the size of first kind of data, but it is
+POSSIBLE for second: reduce value of LASTDRIVE in your config.sys.
+
+If your system support UMB and XMS-driver acts as UMB-server, mscreen
+will use UMB to load data high. Mscreen can't run himself in high memory.
+--------------------------------------------------------------------
+interface to Mscreen:
+
+int 48h used to access Mscreen functions. It has next functions;
+
+  1. IDLE
+     on enter: ah=0
+     on iret : nothing
+     comment : process notify Mscreen that it has nothing to do now.
+     	       It is good idea to use IDLE call in waiting loops.
+
+  2. POST_KEYPRESS
+     on enter: ah=1
+     	       bx=scancode (as int 16 fn 0 returns). 	
+     on iret : flag C is setted if there is no place in mscreen internal 
+	       keyboard buffer of another task.
+     comment : this function post(pass) "keypress" to another window.
+
+  3. ENTER_C
+     on enter: ah=2
+     on iret : nothing
+     comment : after this call task switching is turned off: task enter
+               its critical section - task switching is turned off till
+	       the LEAVE_C call. If programm use dos calls inside this sec-
+               tion, it must check, if dos is busy BEFORE making call ENTER_C.
+  4. LEAVE_C
+     on enter: ah=3
+     on iret : nothing
+     comment : task switching is turned on. Nesting allowed.

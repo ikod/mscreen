@@ -1,0 +1,6 @@
+f2: link msgs
+	tlink mscreen append dosx setargv
+f3: tasm all
+	tasm /m mscreen+dosx+setargv+append
+f4: run  mscreen
+	mscreen fd fc
