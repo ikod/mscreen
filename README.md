@@ -25,7 +25,8 @@ Here is list of files from zip archive
 -rw-rw-r-- 1 igor igor  5609 Sep 27  1995 README.ENG <- README in English
 -rw-rw-r-- 1 igor igor  4796 Sep 27  1995 RELNOTES.TXT
 -rw-rw-r-- 1 igor igor  1159 Dec 10  1992 SETARGV.ASM
--rw-rw-r-- 1 igor igor  2229 Sep 27  1995 SOURCES.ENG <- short description of code and instructions on how to build .exe
+-rw-rw-r-- 1 igor igor  2229 Sep 27  1995 SOURCES.ENG <- short description
+                                      of code and instructions on building
 -rw-rw-r-- 1 igor igor  3926 Aug 10 16:32 SOURCES.TXT
 -rw-rw-r-- 1 igor igor  6160 Nov  8  1993 TASK.INC
 
