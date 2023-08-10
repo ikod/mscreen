@@ -6,7 +6,8 @@ This is small MS-DOS multotasker, written during 1992-1995 when we run
 first BBS and Fido node in Odesa, Ukraine, on very weak IBM-PC XT, and
 later on IBM-PC AT machines.
 
-It features preemptive multitasking, some inter-process communications primitives, prioritized scheduling with round robin planning on each level
+It features preemptive multitasking, some inter-process communication
+primitives, prioritized scheduling with round robin planning on each level
 of priority.
 
 We had to run on the same computer: BBS, a program for dialing uplink for
