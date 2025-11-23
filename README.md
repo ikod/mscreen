@@ -2,8 +2,8 @@
                     +---------------+
                     | M S C R E E N |
                     +---------------+
-This is small MS-DOS multotasker, written during 1992-1995 when we run
-first BBS and Fido node in Odesa, Ukraine, on very weak IBM-PC XT, and
+This is small MS-DOS multitasker, written during 1992-1995 when we run
+first BBS and FidoNet node in Odesa, Ukraine, on very weak IBM-PC XT, and
 later on IBM-PC AT machines.
 
 It features preemptive multitasking, some inter-process communication
